@@ -7,69 +7,60 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.OptimisticLockException;
+import jakarta.transaction.Transactional;
 import todolist.user.repository.UserRepository;
 import todolist.user.service.UserService;
 import todolist.user.dto.JoinUserDto;
 import todolist.user.dto.LoginUserDto;
+import todolist.user.exception.DataNotFoundException;
+import todolist.user.query.UserQueryMethod;
+import todolist.user.dto.AuthUserDto;
 import todolist.user.domain.User;
 import lombok.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
+    private final UserQueryMethod userQueryMethod;
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
-    public LoginUserDto join(JoinUserDto joinUserDto) {
+    @Transactional
+    public AuthUserDto join(JoinUserDto joinUserDto) {
         // TODO Auto-generated method stub
-        LoginUserDto loginUserDto = new LoginUserDto();
-        try
-        {
-            User joinUser = User.builder()
-                                .id(joinUserDto.getId())
-                                .password(joinUserDto.getPassword())
-                                .addr(joinUserDto.getAddr())
-                                .addr_dt(joinUserDto.getAddr_dt())
-                                .birth(joinUserDto.getBirth())
-                                .ph(joinUserDto.getPh())
-                                .gender(joinUserDto.getGender())
-                                .build();
-            
-            
-            User saveUser = userRepository.save(joinUser);
-            loginUserDto.setUser_id(saveUser.getUser_id());
-            loginUserDto.setId(saveUser.getId());
-            // loginUserDto.setUser_type(saveUser.getUser_type());
-            // loginUserDto.setScope_of_disclosure(saveUser.getScope_of_disclosure());
-            // loginUserDto.setNumber_of_following(saveUser.getNumber_of_following());
-            // loginUserDto.setNumber_of_follower(saveUser.getNumber_of_follower());
-
-        }
-        catch(DataIntegrityViolationException e)
-        {
-            // 데이터 무결성 위반 처리
-        }
-        catch(EntityExistsException e)
-        {
-            // 이미 존재하는 엔티티 일 경우 처리
-        }
-        // catch(TransactionRequiredException e){ // 트랜잭션 오류 처리 }
-        catch(OptimisticLockException e){
-            // 낙관적 병행제어 처리
-        }
-        catch(Exception e)
-        {
-            // 기타 예기치 않은 예외 처리
-        }
+        User joinUser = User.builder()
+                            .id(joinUserDto.getId())
+                            .password(joinUserDto.getPassword())
+                            .addr(joinUserDto.getAddr())
+                            .addr_dt(joinUserDto.getAddr_dt())
+                            .birth(joinUserDto.getBirth())
+                            .ph(joinUserDto.getPh())
+                            .gender(joinUserDto.getGender())
+                            .build();
         
-        return loginUserDto;
+        
+        User saveUser = userRepository.save(joinUser);
+
+        AuthUserDto authUserDto = new AuthUserDto(
+            saveUser.getUser_id(), saveUser.getId(),
+            saveUser.getUser_type(), saveUser.getScope_of_disclosure(),
+            saveUser.getNumber_of_following(), saveUser.getNumber_of_follower()
+            );
+        return authUserDto;
     }
 
     @Override
-    public LoginUserDto login(LoginUserDto loginUserDto) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'login'");
+    public AuthUserDto login(LoginUserDto loginUserDto) {
+        AuthUserDto authUserDto = new AuthUserDto();
+        authUserDto = userQueryMethod.findUserOne(loginUserDto.getId(), loginUserDto.getPassword());
+        if( authUserDto == null ) throw new DataNotFoundException("유효하지 않은 사용자 정보");
+        return authUserDto;
     }
 }

@@ -42,4 +42,12 @@ public class User {
     @Column(nullable = false, length = 1)
     private Character gender;
 
+    @Builder.Default
+    private String user_type = "NC";
+    @Column
+    private Long number_of_following;
+    @Column
+    private Long number_of_follower;
+    @Builder.Default
+    private String scope_of_disclosure = "A";
 }

@@ -2,23 +2,16 @@ package todolist.user.service.impl;
 
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import jakarta.persistence.EntityExistsException;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.OptimisticLockException;
 import jakarta.transaction.Transactional;
 import todolist.user.repository.UserRepository;
 import todolist.user.service.UserService;
 import todolist.user.dto.JoinUserDto;
 import todolist.user.dto.LoginUserDto;
 import todolist.user.exception.DataNotFoundException;
-import todolist.user.query.UserQueryMethod;
 import todolist.user.dto.AuthUserDto;
 import todolist.user.domain.User;
-import lombok.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +21,6 @@ import org.slf4j.LoggerFactory;
 public class UserServiceImpl implements UserService{
 
     private final UserRepository userRepository;
-    private final UserQueryMethod userQueryMethod;
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Override
@@ -59,7 +51,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public AuthUserDto login(LoginUserDto loginUserDto) {
         AuthUserDto authUserDto = new AuthUserDto();
-        authUserDto = userQueryMethod.findUserOne(loginUserDto.getId(), loginUserDto.getPassword());
+        authUserDto = userRepository.findUserOne(loginUserDto.getId(), loginUserDto.getPassword());
         if( authUserDto == null ) throw new DataNotFoundException("유효하지 않은 사용자 정보");
         return authUserDto;
     }

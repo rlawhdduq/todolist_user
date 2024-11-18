@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService{
 
         AuthUserDto authUserDto = new AuthUserDto(
             saveUser.getUser_id(), saveUser.getId(),
-            saveUser.getUser_type(), saveUser.getScope_of_disclosure(),
+            saveUser.getUser_type(),
             saveUser.getNumber_of_following(), saveUser.getNumber_of_follower()
             );
         return authUserDto;

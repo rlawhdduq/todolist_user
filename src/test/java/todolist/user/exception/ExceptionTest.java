@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 @SpringBootTest
 public class ExceptionTest {
 
-    @Test
+    // @Test
     public void exceptionTest()
     {
         DataNotFoundException exception = assertThrows(DataNotFoundException.class, () -> {

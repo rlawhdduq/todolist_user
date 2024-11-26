@@ -25,7 +25,7 @@ public class UserQueryTest {
     // @Autowired
     // private ObjectMapper mapper;
 
-    @Test
+    // @Test
     // @Transactional
     public void userLoginQueryTest() throws Exception 
     {

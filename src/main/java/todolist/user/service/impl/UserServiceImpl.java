@@ -2,6 +2,7 @@ package todolist.user.service.impl;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
@@ -20,6 +21,7 @@ import org.slf4j.LoggerFactory;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
+    @Autowired
     private final UserRepository userRepository;
     private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 

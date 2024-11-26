@@ -10,6 +10,6 @@ import todolist.user.dto.AuthUserDto;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
-    @Query("Select new todolist.user.dto.AuthUserDto(u.user_id, u.id, u.user_type, u.scope_of_disclosure, u.number_of_following, u.number_of_follower) From User as u Where u.id = :id and u.password = :password")
+    @Query("Select new todolist.user.dto.AuthUserDto(u.user_id, u.id, u.user_type, u.number_of_following, u.number_of_follower) From User as u Where u.id = :id and u.password = :password")
     AuthUserDto findUserOne(@Param("id") String id, @Param("password") String password);
 }

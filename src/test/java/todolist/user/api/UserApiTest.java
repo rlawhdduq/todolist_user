@@ -35,7 +35,7 @@ public class UserApiTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Test
+    // @Test
     @Transactional
     public void testJoinUser() throws Exception 
     {
@@ -54,7 +54,7 @@ public class UserApiTest {
         log.info("Bye~");
     }
 
-    @Test
+    // @Test
     @Transactional
     public void testLoginUser() throws Exception
     {

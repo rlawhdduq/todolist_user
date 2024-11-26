@@ -22,7 +22,7 @@ public class UserApi {
     private final UserService userService;
     private static final Logger log = LoggerFactory.getLogger(UserApi.class);
 
-    @PostMapping("/api/join")
+    @PostMapping("/api/user/join")
     public AuthUserDto joinUser(@RequestBody JoinUserDto joinUserDto) {
         // 1. 호출할 땐 'DTO'를 설정해주면 DTO에 값이 맞춰져서 들어갈거다.
         // 2. service에서 Join 인터페이스를 상속받아 구현한다
@@ -32,7 +32,7 @@ public class UserApi {
         return authUserDto;
     }
     
-    @PostMapping("/api/login")
+    @PostMapping("/api/user/login")
     public AuthUserDto loginUser(@RequestBody LoginUserDto loginUserDto) {
         AuthUserDto authUserDto = userService.login(loginUserDto);
         log.info("loginResult : " + authUserDto);

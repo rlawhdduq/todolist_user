@@ -54,7 +54,6 @@ public class UserServiceImpl implements UserService{
     public AuthUserDto login(LoginUserDto loginUserDto) {
         AuthUserDto authUserDto = new AuthUserDto();
         authUserDto = userRepository.findUserOne(loginUserDto.getId(), loginUserDto.getPassword());
-        if( authUserDto == null ) throw new DataNotFoundException("유효하지 않은 사용자 정보");
         return authUserDto;
     }
 }

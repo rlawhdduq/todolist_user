@@ -56,4 +56,10 @@ public class UserServiceImpl implements UserService{
         authUserDto = userRepository.findUserOne(loginUserDto.getId(), loginUserDto.getPassword());
         return authUserDto;
     }
+
+    @Override
+    public AuthUserDto getUserInfo(Long user_id) {
+        AuthUserDto authUserDto = userRepository.getUserInfo(user_id);
+        return authUserDto;
+    }
 }

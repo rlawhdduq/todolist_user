@@ -2,6 +2,8 @@ package todolist.user.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.slf4j.Logger;
@@ -39,6 +41,12 @@ public class UserApi {
         return authUserDto;
     }
     
+    @GetMapping("/api/user/info/{user_id}")
+    public AuthUserDto getUserInfo(@PathVariable Long user_id) {
+        AuthUserDto authUserDto = userService.getUserInfo(user_id);
+        log.info("getUserInfo : " + authUserDto);
+        return authUserDto;
+    }
 }
 /**
  * 지금은 Dto로 반환하도록 해두었는데, 나중엔 Json객체를 암호화해서 넘길예정

@@ -1,4 +1,4 @@
-package todolist.user.api;
+package todolist.user.api.mq;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;

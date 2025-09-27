@@ -1,4 +1,4 @@
-package todolist.user.service.impl;
+package todolist.user.service.rest.impl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
 import todolist.user.repository.UserRepository;
-import todolist.user.service.UserService;
+import todolist.user.service.rest.UserService;
 import todolist.user.dto.JoinUserDto;
 import todolist.user.dto.LoginUserDto;
 import todolist.user.exception.DataNotFoundException;

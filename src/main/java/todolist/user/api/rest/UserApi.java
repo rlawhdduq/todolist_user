@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import todolist.user.dto.JoinUserDto;
 import todolist.user.dto.LoginUserDto;
 import todolist.user.dto.AuthUserDto;
-import todolist.user.service.UserService;
+import todolist.user.service.rest.UserService;
 
 @RestController
 @RequiredArgsConstructor

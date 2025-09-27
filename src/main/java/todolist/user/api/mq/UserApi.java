@@ -1,6 +1,7 @@
 package todolist.user.api.mq;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,8 @@ import todolist.user.service.mq.UserService;
 @RequiredArgsConstructor
 public class UserApi {
 
+    @Autowired
+    @Qualifier("mqService")
     private final UserService userService;
     private static final Logger log = LoggerFactory.getLogger(UserApi.class);
 

@@ -1,6 +1,7 @@
 package todolist.user.api.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +24,8 @@ import todolist.user.service.rest.UserService;
 @RequestMapping("/rest")
 public class UserApi {
 
+    @Autowired
+    @Qualifier("restService")
     private final UserService userService;
     private static final Logger log = LoggerFactory.getLogger(UserApi.class);
 

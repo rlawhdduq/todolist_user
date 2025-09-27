@@ -3,11 +3,7 @@ package todolist.user.service.mq;
 import todolist.user.dto.JoinUserDto;
 import todolist.user.dto.LoginUserDto;
 
-import org.springframework.stereotype.Service;
-
 import todolist.user.dto.AuthUserDto;
-
-@Service("mqService")
 public interface UserService {
 
     AuthUserDto join(JoinUserDto joinUserDto);         // 회원가입

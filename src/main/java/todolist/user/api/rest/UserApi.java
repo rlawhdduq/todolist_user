@@ -23,7 +23,6 @@ import todolist.user.service.UserService;
 @RequestMapping("/rest")
 public class UserApi {
 
-    @Autowired
     private final UserService userService;
     private static final Logger log = LoggerFactory.getLogger(UserApi.class);
 

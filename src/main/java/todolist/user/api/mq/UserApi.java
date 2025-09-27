@@ -20,7 +20,6 @@ import todolist.user.service.UserService;
 @RequiredArgsConstructor
 public class UserApi {
 
-    @Autowired
     private final UserService userService;
     private static final Logger log = LoggerFactory.getLogger(UserApi.class);
 

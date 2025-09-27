@@ -22,12 +22,12 @@ import todolist.user.service.rest.UserService;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/rest")
-public class UserApi {
+public class UserRestApi {
 
     @Autowired
     @Qualifier("restService")
     private final UserService userService;
-    private static final Logger log = LoggerFactory.getLogger(UserApi.class);
+    private static final Logger log = LoggerFactory.getLogger(UserRestApi.class);
 
     @RequestMapping(method=RequestMethod.POST)
     public AuthUserDto joinUser(@RequestBody JoinUserDto joinUserDto) {

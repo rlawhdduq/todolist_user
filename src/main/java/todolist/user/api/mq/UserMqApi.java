@@ -19,12 +19,12 @@ import todolist.user.service.mq.UserService;
 
 @RestController
 @RequiredArgsConstructor
-public class UserApi {
+public class UserMqApi {
 
     @Autowired
     @Qualifier("mqService")
     private final UserService userService;
-    private static final Logger log = LoggerFactory.getLogger(UserApi.class);
+    private static final Logger log = LoggerFactory.getLogger(UserMqApi.class);
 
     @PostMapping("/api/user/join")
     public AuthUserDto joinUser(@RequestBody JoinUserDto joinUserDto) {

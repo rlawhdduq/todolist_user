@@ -58,8 +58,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public AuthUserDto getUserInfo(Long user_id) {
-        AuthUserDto authUserDto = userRepository.getUserInfo(user_id);
+    public AuthUserDto getUserInfo(String id) {
+        AuthUserDto authUserDto = userRepository.getUserInfo(id);
         return authUserDto;
     }
 }

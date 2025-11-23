@@ -47,8 +47,8 @@ public class UserRestApi {
     }
     
     @RequestMapping(path="/{userId}", method=RequestMethod.GET)
-    public AuthUserDto getUserInfo(@PathVariable Long user_id) {
-        AuthUserDto authUserDto = userService.getUserInfo(user_id);
+    public AuthUserDto getUserInfo(@PathVariable String id) {
+        AuthUserDto authUserDto = userService.getUserInfo(id);
         log.info("getUserInfo : " + authUserDto);
         return authUserDto;
     }
